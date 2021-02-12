@@ -3,6 +3,7 @@
 ## items
 
 |Column               |Type      |Options    |
+|---------------------|----------|-----------|
 |name                 |string    |null: false|
 |explain              |text      |null: false|
 |category_id          |integer   |null: false|
@@ -14,13 +15,14 @@
 |user                 |references|foreign_key: true|
 
 ## Associations
-items | has_one :item
+items | has_one :purchase
       | belongs_to :user
 
 
 ## users
 
 |Column               |Type      |Options          |
+|---------------------|----------|-----------------|
 |nick_name            |string    |null: false      |
 |email                |string    |null: false, unique: true|
 |encrypted_password   |string    |null: false|
@@ -40,6 +42,7 @@ users | has_many :items
 
 
 |Column               |Type      |Options          |
+|---------------------|----------|-----------------|
 |item                 |references|foreign_key: true|
 |user                 |references|foreign_key: true|
 
@@ -54,12 +57,13 @@ purchases | belongs_to :item
 
 
 |Column               |Type      |Options          |
+|---------------------|----------|-----------------|
 |postal code          |string    |null: false      |
 |prefecture_id        |integer   |null: false      |
 |city                 |string    |null: false      |
 |house_number         |string    |null: false      |
 |phone_number         |string    |null: false      |
-|building_name        |string    |null: false      |
+|building_name        |string    |                 |
 |purchase             |references|foreign_key: true|
 
 
