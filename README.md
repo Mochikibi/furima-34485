@@ -11,49 +11,57 @@
 |delivery_fee_id      |integer   |null: false|
 |prefecture_id        |integer   |null: false|
 |scheduled_delivery_id|integer   |null: false|
-|user_id              |references|foreign_key: true|
+|user                 |references|foreign_key: true|
+
+## Associations
+items | has_one :item
+      | belongs_to :user
+
 
 ## users
 
 |Column               |Type      |Options          |
 |nick_name            |string    |null: false      |
-|mail_address         |string    |null: false, unique: true|
-|birth_date           |integer   |null: false|
+|email                |string    |null: false, unique: true|
+|encrypted_password   |string    |null: false|
+|birth_date           |date      |null: false|
 |first_name           |string    |null: false|
 |last_name            |string    |null: false|
 |first_name_kana      |string    |null: false|
-|last_name_kana       |          |null: false|
-
-
-## purchases
-
-
-|Column               |Type      |Options          |
-|item_id              |references|foreign_key: true|
-|user_id              |references|foreign_key: true|
-
-
-## addresses
-
-
-|Column               |Type      |Options          |
-|postal code          |integer   |null: false      |
-|prefecture_id        |integer   |null: false      |
-|city                 |string    |null: false      |
-|house_number         |string    |null: false      |
-|phone_number         |string    |null: false      |
-
+|last_name_kana       |string    |null: false|
 
 ## Associations
 
 users | has_many :items
       | has_many :purchases
 
-items | has_one :item
-      | belongs_to :user
 
+## purchases
+
+
+|Column               |Type      |Options          |
+|item                 |references|foreign_key: true|
+|user                 |references|foreign_key: true|
+
+
+## Associations
 purchases | belongs_to :item
           | belongs_to :user
           | has_one_to :address
 
+
+## addresses
+
+
+|Column               |Type      |Options          |
+|postal code          |string    |null: false      |
+|prefecture_id        |integer   |null: false      |
+|city                 |string    |null: false      |
+|house_number         |string    |null: false      |
+|phone_number         |string    |null: false      |
+|building_name        |string    |null: false      |
+|purchase             |references|foreign_key: true|
+
+
+## Associations
 addresses | belongs_to :purchase
