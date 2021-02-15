@@ -93,7 +93,7 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Last name can't be blank")
     end
     it '名前が半角では登録できない' do
-      @user.last_name = ''
+      @user.last_name = 'masaya'
       @user.valid?
       expect(@user.errors.full_messages).to include('Last name Full-width characters')
     end
