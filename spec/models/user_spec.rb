@@ -60,6 +60,13 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
+    it 'パスワードは英語のみでは登録できない' do
+      @user.password = 'Masaya'
+      @user.password_confirmation = 'Masaya'
+      @user.valid? 
+      expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+    end
+    end
     it 'パスワードが確認項目と一致しなければ登録できない' do
       @user.password_confirmation = 'Masaya857'
       @user.valid?
@@ -112,4 +119,4 @@ RSpec.describe User, type: :model do
     end
   end
 end
-end
+
