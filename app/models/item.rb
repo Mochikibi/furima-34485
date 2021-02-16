@@ -22,6 +22,6 @@ class Item < ApplicationRecord
       validates :prefecture_id
       validates :scheduled_delivery_id
     end
-    validates :price, numericality: { only_integer: true, message: 'Half-width number' }
   end
+  validates :price, numericality: { only_integer: true, message: 'Half-width number' }
 end
