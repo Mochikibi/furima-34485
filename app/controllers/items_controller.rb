@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :move_to_index_logIn, only: [:edit, :update]
   before_action :same_actions, only: [:show, :edit, :update]
+  before_action :move_to_index, only: [:edit, :update]
 
   def index
     @item = Item.all.order('created_at DESC')
@@ -43,8 +43,7 @@ class ItemsController < ApplicationController
                                  :scheduled_delivery_id, :image).merge(user_id: current_user.id)
   end
 
-  def move_to_index_logIn
-    @item = Item.find(params[:id])
+  def move_to_index
     if user_signed_in? && current_user.id != @item.user.id
       redirect_to action: :index 
   end
