@@ -4,5 +4,4 @@ root to: "items#index"
 resources :items do
  resources :purchases
 end
-resources :addresses
 end

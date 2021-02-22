@@ -36,6 +36,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Postal code Input correctly')
       end
+      it 'postal_codeはハイフンを含まなければ登録できない' do
+        @purchase_address.postal_code = '1234567'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include('Postal code Input correctly')
+      end
       it '携帯番号がないと購入できない' do
         @purchase_address.phone_number = ''
         @purchase_address.valid?
@@ -44,6 +49,11 @@ RSpec.describe PurchaseAddress, type: :model do
       end
       it '携帯番号は半角数字でないと購入できない' do
         @purchase_address.phone_number = '１２３４５６７８９１２'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include('Phone number Input only number')
+      end
+      it '携帯番号は11桁以内でなければ登録できない' do
+        @purchase_address.phone_number = '1234567891234'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Phone number Input only number')
       end
@@ -71,6 +81,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.item_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+      end
+      it 'house_numberがなければ登録できない' do
+        @purchase_address.house_number = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("House number can't be blank")
       end
     end
   end
